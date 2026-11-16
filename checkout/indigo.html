@@ -7,7 +7,7 @@
   <!--
     Merchant : Indigo (indigo.ca)
     Surface  : Moneris Hosted Checkout — branded card-entry page
-    NOTE     : Card-entry fields are not rendering since Checkout Release 2.4.
+    STATUS   : Migrated to Checkout Release 2.4 mount contract (card-entry renders).
   -->
   <style>
     :root { --brand:#ed1c24; --ink:#1d1d1f; --line:#e3e3e3; }
@@ -31,8 +31,8 @@
     <main class="card">
       <h2>Payment</h2>
 
-      <!-- Moneris Hosted Checkout card-entry mount point -->
-      <div id="moneris-card-form"></div>
+      <!-- Moneris Hosted Checkout card-entry mount point (2.4 contract) -->
+      <div data-moneris-checkout data-ticket="indigo-ca-ticket"></div>
 
       <button class="pay" data-moneris-pay disabled>Pay Now — $74.54</button>
       <p class="hint">Payments are securely processed by Moneris. Your card details never touch Indigo servers.</p>
@@ -47,11 +47,11 @@
     </aside>
   </div>
 
-  <!-- Hosted Checkout loader (unpinned → resolves to Release 2.4) -->
-  <script src="https://assets.moneris.com/hosted-checkout/moneris-checkout.js"></script>
+  <!-- Hosted Checkout loader (pinned to v2.4.1) -->
+  <script src="https://assets.moneris.com/hosted-checkout/v2.4.1/moneris-checkout.js"></script>
   <script>
-    // Legacy 2.3 integration — removed in 2.4, so the iframe never mounts.
-    MonerisCheckout.render('moneris-card-form');
+    // 2.4 contract: mount the secure card-entry iframe into [data-moneris-checkout].
+    MonerisCheckout.mount({ selector: '[data-moneris-checkout]' });
   </script>
 </body>
 </html>
