@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout — Voilà by Sobeys</title>
+  <!--
+    Merchant : Sobeys (voila.ca)
+    Surface  : Moneris Hosted Checkout — branded card-entry page
+    NOTE     : Card-entry fields are not rendering since Checkout Release 2.4.
+  -->
+  <style>
+    :root { --brand:#00653a; --brand-dark:#004d2c; --ink:#1d1d1f; --line:#e3e3e3; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: "Helvetica Neue", Arial, sans-serif; color:var(--ink); background:#f6f7f8; }
+    header { background:var(--brand); color:#fff; padding:18px 24px; font-size:22px; font-weight:700; letter-spacing:.2px; }
+    .wrap { max-width:960px; margin:28px auto; padding:0 20px; display:grid; grid-template-columns: 1fr 360px; gap:28px; }
+    .card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:24px; }
+    h2 { margin:0 0 16px; font-size:18px; }
+    .order-row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--line); font-size:14px; }
+    .order-total { display:flex; justify-content:space-between; padding-top:14px; font-weight:700; font-size:16px; }
+    .moneris-card-frame { width:100%; min-height:220px; border:0; }
+    .pay { margin-top:20px; width:100%; background:var(--brand); color:#fff; border:0; border-radius:8px; padding:14px; font-size:16px; font-weight:700; cursor:pointer; }
+    .pay:disabled { background:#b7c6bd; cursor:not-allowed; }
+    .hint { font-size:12px; color:#6b6b6b; margin-top:10px; }
+  </style>
+</head>
+<body>
+  <header>Voilà by Sobeys — Secure Checkout</header>
+  <div class="wrap">
+    <main class="card">
+      <h2>Payment</h2>
+
+      <!-- Moneris Hosted Checkout card-entry mount point -->
+      <div id="moneris-card-form"></div>
+
+      <button class="pay" data-moneris-pay disabled>Pay Now — $142.57</button>
+      <p class="hint">Payments are securely processed by Moneris. Your card details never touch Sobeys servers.</p>
+    </main>
+
+    <aside class="card">
+      <h2>Order summary</h2>
+      <div class="order-row"><span>Grocery (23 items)</span><span>$128.42</span></div>
+      <div class="order-row"><span>Delivery</span><span>$9.95</span></div>
+      <div class="order-row"><span>Tax</span><span>$4.20</span></div>
+      <div class="order-total"><span>Total</span><span>$142.57</span></div>
+    </aside>
+  </div>
+
+  <!-- Hosted Checkout loader (unpinned → resolves to Release 2.4) -->
+  <script src="https://assets.moneris.com/hosted-checkout/moneris-checkout.js"></script>
+  <script>
+    // Legacy 2.3 integration — removed in 2.4, so the iframe never mounts.
+    MonerisCheckout.render('moneris-card-form');
+  </script>
+</body>
+</html>
